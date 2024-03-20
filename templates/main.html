@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static', filename = 'CSS/style.css')}}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
+    
+    <title>spotisearch</title>
+    </head>
+
+    <body>
+        <div class="page_header">
+            <a href="/spotisearch" class="page_name">SpAlbumListener</a>
+            <a href="/about" class="about">About</a>
+            <!-- Logout link -->
+            <a href="#" onclick="logout()" class="logout">Logout</a>
+            <form id="logoutForm" method="post" action="{{ url_for('logout') }}" style="display: none;">
+            </form>
+        </div>
+        <script>
+            function logout() {
+                document.getElementById("logoutForm").submit();
+            }
+        </script>
+        
+        <h1 class="page_title" >Know your favourite artist albums</h1>
+    
+        <div class="search_container">
+            <form method="post">
+                <input type="text" class="searchbar" autocomplete="off" name="artist_name" placeholder="artist name" id="artist_name" required>
+            </form>
+        </div>    
+
+        <div class="artist_data_container">
+            {% if data %}
+                {% if data['images'] %}
+                <div class="image_and_name">
+                    <img class="artist_image" src="{{ data['images'][0]['url'] }}" alt="{{ data['name'] }} Image" width="310" height="310">
+                    <div class="spotify_artist_name">{{ data['name'] }}</div>
+                </div>
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+
+    
+                {% if not albums_json_response %}
+                    <p class="no_albums">This artist has no albums</p>
+                {% endif %}
+            {% endif %}
+    
+    
+    
+            {% if albums_json_response %}
+                <!-- div containing the embed-->
+                    {% if initial_uri is not none %}
+                    <iframe src="https://open.spotify.com/embed/album/{{ initial_uri.split(':')[-1] }}" width="500" height="360" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    {% endif %}
+        </div>
+            <button onclick="changeAlbum()" class="button">Change Album</button>
+    
+            
+            {% if album_uris and album_uris|length > 0 %}
+                <script>
+                    const albumUriValues = [
+                        {% for uri in album_uris %}
+                            '{{ uri.split(":")[-1] }}',
+                        {% endfor %}
+                    ];
+    
+                    let currentIndex = 0;
+    
+                    // Function to change the album URI
+                    function changeAlbum() {
+                        const nextIndex = (currentIndex + 1) % albumUriValues.length;
+                        const nextUri = albumUriValues[nextIndex];
+    
+                        // Update the src attribute of the iframe
+                        document.querySelector('iframe').src = `https://open.spotify.com/embed/album/${nextUri}`;
+    
+                        currentIndex = nextIndex;
+                    }
+    
+                    // Output the initial URI for debugging
+                    console.log('Initial URI:', '{{ initial_uri.split(":")[-1] }}');
+                </script>
+            {% else %}
+                <script>
+                    // Define an empty changeAlbum function if album_uris is empty
+                    function changeAlbum() {
+                        console.log('No albums available.');
+                    }
+                </script>
+            {% endif %}
+    
+        {% endif %}
+    
+        {% if error %}
+        <p class="error">No artist found, Please Introduce the name of the artist Properly</p>
+        {% endif %}
+    
+        <footer>
+            
+        </footer>
+    
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static', filename = 'CSS/style.css')}}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
+    
+    <title>spotisearch</title>
+    </head>
+
+    <body>
+        <div class="page_header">
+            <a href="/spotisearch" class="page_name">SpAlbumListener</a>
+            <a href="/callback" class="about-back">Back</a>
+            <!-- Logout link -->
+            <a href="#" onclick="logout()" class="logout">Logout</a>
+            <form id="logoutForm" method="post" action="{{ url_for('logout') }}" style="display: none;">
+            </form>
+        </div>
+        <script>
+            function logout() {
+                document.getElementById("logoutForm").submit();
+            }
+        </script>
+        <div class="about-container">
+            <p class="about-p">
+                This website project was made for the
+                cs50 course: “Introduction to Programming with Python” 
+                final project presentation. It interacts with the Spotify 
+                Api by making the user to log-in with his/her account. 
+                Its functionality is to look out for artist multiple albums 
+                and being able to reproduce their tracks. This project was made
+                to showcase my knowledge obtained from the course. There is no intention 
+                to gain any type of benefit or money from it. Also, there is no intention 
+                to manipulate or to use client information against him.<br><br>  
+                Remember to log out if you want to exit the  program!
+            </p>
+        </div>
+    </body>
+</html>
