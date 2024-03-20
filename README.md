@@ -1,9 +1,14 @@
 # SpAlbumListener
-    ## Video Demo:
-    https://youtu.be/DaGPmyPFyhs
-    #### Description: Hello everyone!, In this project I created a website using Flask. Flask is a python framework for creating web aplications. I crated this website for the presentation of my final project of the CS50´s Introduction to Programming with Python. 
+![Captura de pantalla 2024-03-19 104330](https://github.com/santiago-otero/SpAlbumListener/assets/142631458/68299e1a-7f55-41e8-9fac-54932f6afced)
+
+
+# Video Demo:
+https://youtu.be/DaGPmyPFyhs
+   
+# Description:
+Hello everyone!, In this project I created a website using Flask. Flask is a python framework for creating web aplications. I crated this website for the presentation of my final project of the CS50´s Introduction to Programming with Python. 
     
-    App ussage:
+# App ussage:
     The application that i created is for looking up different albums of whatever artist in the world by interacting with the Spotify API to make the searching and displaying of albums and tracks. You can type whatever artist name and my program will return the lastest album they have made. In addition you can swich trough 4 extra albums the artist has in the Spotify plataform in case the artist launched more albums and you can display every track that the album contains. 
     
     Program Logic and understanding: 
