@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 from requests import post, get
 from flask import Flask, request, redirect, session, url_for, render_template
 from spotipy import Spotify
@@ -7,14 +6,12 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 import requests
 
-load_dotenv()
-
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
 
 # get your passwords form a .env file for safer use. Remember to use dotenv module
-client_id = os.getenv('ClIENT_ID')
-client_secret = os.getenv('ClIENT_SECRET')
+client_id = os.environ.get('SP_ClIENT_ID')
+client_secret = os.environ.get('SP_CLIENT_SECRET')
 redirect_uri = 'http://localhost:5000/callback'
 
 cache_handler = FlaskSessionCacheHandler(session)
